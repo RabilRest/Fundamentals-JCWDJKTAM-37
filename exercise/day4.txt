@@ -1,0 +1,207 @@
+// ================================
+// NOMOR 1 — SEGITIGA ANGKA
+// ================================
+function numberTriangle(height: number) {
+  let num = 1; // angka pertama
+  for (let i = 1; i <= height; i++) { // loop setiap baris
+    let row: string[] = []; // array untuk menyimpan angka di baris ini
+    for (let j = 1; j <= i; j++) { // loop tiap kolom di baris
+      row.push(num.toString().padStart(2, "0")); // angka dengan leading zero
+      num++; // naikkan angka
+    }
+    console.log(row.join(" ")); // gabungkan angka di baris jadi string
+  }
+}
+
+console.log("=== Nomor 1 ===");
+numberTriangle(4); // contoh height 4
+// Fungsi:
+// Mencetak segitiga angka bertingkat.
+// rows → jumlah baris segitiga.
+// counter → angka yang dicetak bertambah tiap posisi.
+// line → menyimpan angka tiap baris, digabung jadi string sebelum dicetak.
+// .padStart(2, "0") → menambahkan leading zero supaya angka 1 jadi "01", 2 jadi "02", dll.
+
+
+// ================================
+// NOMOR 2 — FIZZBUZZ
+// ================================
+function fizzBuzz(n: number): (string | number)[] {
+  return Array.from({ length: n }, (_, i) => { // buat array 1..n
+    const num = i + 1; // index mulai dari 1
+    if (num % 3 === 0 && num % 5 === 0) return "FizzBuzz"; // kelipatan 3 & 5
+    if (num % 3 === 0) return "Fizz"; // kelipatan 3
+    if (num % 5 === 0) return "Buzz"; // kelipatan 5
+    return num; // angka biasa
+  });
+}
+
+console.log("=== Nomor 2 ===");
+console.log(fizzBuzz(6));  // [1,2,"Fizz",4,"Buzz","Fizz"]
+console.log(fizzBuzz(15)); // array 1..15 dengan FizzBuzz
+
+// Fungsi:
+// Membuat array dari 1 sampai n.
+// Setiap angka dicek:
+// Kelipatan 3 & 5 → "FizzBuzz"
+// Kelipatan 3 → "Fizz"
+// Kelipatan 5 → "Buzz"
+// Lainnya → angka itu sendiri.
+// Mengembalikan array hasil FizzBuzz.
+
+// ================================
+// NOMOR 3 — BMI
+// ================================
+function bmi(weight: number, height: number): string {
+  const value = weight / (height * height); // kg / m^2
+
+  if (value < 18.5) return "less weight";
+  if (value >= 18.5 && value <= 24.9) return "ideal";
+  if (value >= 25.0 && value <= 29.9) return "overweight";
+  if (value >= 30.0 && value <= 39.9) return "very overweight";
+  return "obesitas";
+}
+
+console.log("=== Nomor 3 ===");
+console.log(bmi(50, 1.7)); // less weight
+console.log(bmi(65, 1.7)); // ideal
+console.log(bmi(95, 1.7)); // very overweight
+
+// Fungsi:
+// Menghitung BMI: weight / (height^2)
+// Memberikan kategori berdasarkan nilai BMI:
+// <18.5 → underweight
+// 18.5–24.9 → normal
+// 25–29.9 → overweight
+// 30–39.9 → obese
+// >=40 → extreme obesity
+// Mengembalikan string kategori.
+
+// ================================
+// NOMOR 4 — ARRAY & INDEX
+// ================================
+const points3: number[] = [1,2,3,4,5,6,7,8,9,10];
+
+const result = points3.map((point, index) => {
+  console.log(index + 1); // tampilkan index 1..10
+  if (point <= 5) {
+    return point * 2; // hanya angka 1..5 dikali 2
+  }
+  return undefined; // sisanya diabaikan
+}).filter(x => x !== undefined); // hapus undefined
+
+console.log("=== Nomor 4 ===");
+console.log(result); // [2,4,6,8,10]
+
+// Fungsi:
+// Membuat array 1–10.
+// forEach untuk loop tiap elemen:
+// console.log(idx + 1) → tampilkan urutan index 1–10
+// Hanya angka 1–5 dikali 2 dan disimpan ke array baru doubledFirstFive.
+// .push → menambah elemen ke array hasil.
+
+// ================================
+// NOMOR 5 — SPLIT KALIMAT
+// ================================
+const words = (text: string): string[] => {
+  return text.split(" "); // pisah kata berdasarkan spasi
+}
+
+console.log("=== Nomor 5 ===");
+console.log(words("Hello World from TypeScript")); 
+// ["Hello","World","from","TypeScript"]
+
+// Fungsi:
+// Memisahkan string menjadi array kata berdasarkan spasi.
+// .filter(word => word.length > 0) → hapus spasi kosong jika ada.
+// Mengembalikan array kata.
+
+
+/* 
+NOMOR 1
+Mulai
+  ↓
+Set counter = 1
+  ↓
+Loop baris i = 1 sampai height
+  ↓
+    Loop kolom j = 1 sampai i
+       ↓
+       Tambahkan counter ke baris (dengan padStart)
+       ↑
+       counter++
+    ↑
+  Cetak baris
+↑
+Selesai
+Intinya:
+Baris 1 → 1 angka
+Baris 2 → 2 angka
+dst, counter bertambah tiap kali
+
+NOMOR 2
+Mulai
+  ↓
+Loop i = 1 sampai n
+  ↓
+  Jika i % 15 == 0 → FizzBuzz
+  Else jika i % 3 == 0 → Fizz
+  Else jika i % 5 == 0 → Buzz
+  Else → angka i
+  ↓
+Tambahkan hasil ke array
+↑
+Selesai → return array
+Intinya:
+Prioritas cek 3 & 5 dulu
+Sisanya dikembalikan angka biasa
+
+NOMOR 3
+Mulai
+  ↓
+Hitung bmiValue = weight / (height^2)
+  ↓
+Jika bmiValue < 18.5 → underweight
+Else jika < 25 → normal
+Else jika < 30 → overweight
+Else jika < 40 → obese
+Else → extreme obesity
+  ↓
+Return kategori
+Selesai
+Intinya:
+Hitung BMI dulu
+Bandingkan dengan range standar → output kategori
+
+NOMOR 4
+Mulai
+  ↓
+Buat array numbers = [1..10]
+  ↓
+Loop tiap angka n, index idx
+  ↓
+  Cetak index + 1
+  Jika n <= 5 → push n*2 ke doubledFirstFive
+  ↑
+Selesai loop
+  ↓
+Cetak doubledFirstFive
+Selesai
+Intinya:
+Index dicetak semua (1–10)
+Hanya angka ≤5 dikali 2 → array hasil
+
+NOMOR 5
+Mulai
+  ↓
+Ambil input string
+  ↓
+Split string berdasarkan spasi → array kata
+  ↓
+Filter kata kosong
+  ↓
+Return array kata
+Selesai
+Intinya:
+Pisahkan kata → hapus spasi kosong → dapat array kata bersih
+*/
